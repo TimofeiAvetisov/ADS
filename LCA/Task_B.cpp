@@ -1,24 +1,21 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+#define int long long
 
 vector<int> d;
 vector<vector<int>> g, p;
-vector<bool> used;
 int L = 20;
 
 void dfs(int v, int pr)
 {
-    used[v] = true;
     d[v] = d[pr] + 1;
     p[v][0] = pr;
     for(int i = 1; i < L; ++i){
         p[v][i] = p[p[v][i - 1]][i - 1];
     }
     for(auto i : g[v]){
-        if (!used[i])  {
-            dfs(i, v);
-        }
+        dfs(i, v);
     }
 }
 
@@ -47,33 +44,42 @@ int lca(int a, int b) {
 }
 
 
-int main() {
+signed main() {
     std::ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    int n, q;
-    cin >> n >> q;
+    int n, m;
+    cin >> n >> m;
     g.resize(n);
-    p.resize(n, vector<int>(L));    
-    used.resize(n, false);
-    d.resize(n, 0);
+    p.resize(n, vector<int>(L));
+    d.resize(n);
 
-    for (int i = 0; i < n - 1; ++i) {
-        int u, v;
-        cin >> u >> v;
-        --u;--v;
-        g[u].push_back(v);
-        g[v].push_back(u);
+    for (int i = 1; i < n; ++i) {
+        int pr;
+        cin >> pr;
+        g[pr].push_back(i);
     }
 
     dfs(0, 0);
 
-    for (int i = 0; i < q; ++i) {
-        int u, v;
-        cin >> u >> v;
-        --u;--v;
-        int lc = lca(u, v);
-        cout << d[u] + d[v] - 2 * d[lc] << '\n';
+    long long answer = 0;
+    int a, b;
+    cin >> a >> b;
+    int x, y, z;
+    cin >> x >> y >> z;
+    int ans;
+
+    for (int i = 0; i < m; ++i) {
+        if (i == 0) {
+            ans = lca(a, b);
+        } else {
+            ans = lca((a + ans) % n, b);
+        }
+        answer += ans;
+        a = (x * a + y * b + z) % n;
+        b = (x * b + y * a + z) % n;
     }
+
+    cout << answer;
 }
