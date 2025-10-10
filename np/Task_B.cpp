@@ -121,14 +121,13 @@ int main() {
     }
 
     vector<int> cmp = scc(g, g_rev);
-
     string answer(n, '\0');
     for (int v = 0; v < n; ++v) {
         if (cmp[2 * v] == cmp[2 * v + 1]) {
             cout << "Impossible\n";
             return 0;
         }
-        answer[v] = int_char((cmp[2 * v] > cmp[2 * v + 1] ? clr1[v] : clr2[v])); // если че инвертнуть условие
+        answer[v] = int_char((cmp[2 * v] > cmp[2 * v + 1] ? clr1[v] : clr2[v]));
     }
     cout << answer << '\n';
 }
