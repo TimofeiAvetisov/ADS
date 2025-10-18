@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "random": "cpp",
+        "numbers": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "array": "cpp",
+        "bitset": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "stacktrace": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp",
+        "chrono": "cpp",
+        "type_traits": "cpp"
+    }
+}
